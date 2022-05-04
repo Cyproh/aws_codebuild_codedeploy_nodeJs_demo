@@ -2,29 +2,31 @@ version: 0.2
 run-as: root
 
 
-phases:
-  install:
-      run-as: root
-      runtime-versions:
-      docker: 18
-    pre_build:
-      commands:
-        - echo Logging in to Amazon ECR...
-        - aws --version
-        - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 840971387785.dkr.ecr.us-east-1.amazonaws.com
+phases: 
+  artifacts: 
+    files: imagedefinitions.json
+  install: 
+    build: 
+      commands: 
+        - "echo Build started on `date`"
+        - "echo Building the Docker image..."
+        - "docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG ."
+        - "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 840971387785.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
+    docker: 18
+    post_build: 
+      commands: 
+        - "echo Build completed on `date`"
+        - "echo Pushing the Docker image..."
+        - "docker push $840971387785.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG"
+        - "echo Writing image definitions file..."
+        - "printf '[{\"name\":\"%s\",\"imageUri\":\"%s\"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json"
+    pre_build: 
+      commands: 
+        - "echo Logging in to Amazon ECR..."
+        - "aws --version"
+        - "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 840971387785.dkr.ecr.us-east-1.amazonaws.com"
         - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME
-    build:
-      commands:
-        - echo Build started on `date`
-        - echo Building the Docker image...          
-        - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-        - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 840971387785.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
-    post_build:
-     commands:
-        - echo Build completed on `date`
-        - echo Pushing the Docker image...
-        - docker push $840971387785.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-        - echo Writing image definitions file...
-        - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-  artifacts:
-      files: imagedefinitions.json
+    run-as: root
+    runtime-versions: ~
+run-as: root
+version: 0.2
