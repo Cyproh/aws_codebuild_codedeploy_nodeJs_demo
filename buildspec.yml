@@ -4,6 +4,7 @@ run-as: root
 
 phases:
   install:
+      run-as: root
       runtime-versions:
       docker: 18
     pre_build:
