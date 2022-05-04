@@ -1,6 +1,6 @@
 #!  /bin/bash
 profile="default"
-region="us-west-2"
+region="us-east-1"
 buildTag="shellscript-demo:latest"
 
 echo "$1"
@@ -20,7 +20,7 @@ if [[ -n "$3" ]]; then
 fi
 
 
-aws ecr get-login-password --region "${region}" --profile "${profile}" | docker login --username AWS --password-stdin "120717539064.dkr.ecr.${region}.amazonaws.com"
+aws ecr get-login-password --region "$AWS_DEFAULT_REGION" --profile "${profile}" | docker login --username AWS --password-stdin "840971387785.dkr.ecr.us-east-1.amazonaws.com"
 docker build -t "${buildTag}" .
-docker tag "${buildTag}" "120717539064.dkr.ecr.us-west-2.amazonaws.com/${buildTag}"
-docker push "120717539064.dkr.ecr.us-west-2.amazonaws.com/${buildTag}"
+docker tag "${buildTag}" "840971387785.dkr.ecr.us-east-1.amazonaws.com/${buildTag}"
+docker push "840971387785.dkr.ecr.us-east-1.amazonaws.com/${buildTag}"
