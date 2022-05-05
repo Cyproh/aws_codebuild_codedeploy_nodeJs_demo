@@ -1,6 +1,6 @@
 [
   {
-    "name": "sample-app",
-    "imageUri": "11111EXAMPLE.dkr.ecr.us-west-2.amazonaws.com/ecs-repo:latest"
+    "name": "cicddemonodeapp",
+    "imageUri": "840971387785.dkr.ecr.us-east-1.amazonaws.com/ecs-repo:latest"
   }
 ]
