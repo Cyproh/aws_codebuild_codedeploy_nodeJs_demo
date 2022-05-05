@@ -1,6 +1,6 @@
 [
   {
-    "name": "DemoNodeApp",
+    "name": "cicddemo",
     "imageUri": "840971387785.dkr.ecr.us-east-1.amazonaws.com/ecs-repo:latest"
   }
 ]
