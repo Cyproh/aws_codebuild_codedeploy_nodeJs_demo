@@ -1,6 +1,6 @@
 [
   {
     "name": "CICDcluster",
-    "imageUri": "840971387785.dkr.ecr.us-east-1.amazonaws.com/ecs-repo:latest"
+    "imageUri": "840971387785.dkr.ecr.us-east-1.amazonaws.com/cicddemo:latest"
   }
 ]
