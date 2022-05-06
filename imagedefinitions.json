@@ -1,6 +1,6 @@
 [
   {
-    "name": "CICDcluster",
+    "name": "NodeAppContainer",
     "imageUri": "840971387785.dkr.ecr.us-east-1.amazonaws.com/cicddemo:latest"
   }
 ]
