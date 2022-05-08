@@ -3,9 +3,9 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-east-1:111222333444:task-definition/my-task-definition-family-name:1"
+        TaskDefinition: "arn:aws:ecs:us-east-1:840971387785:task-definition/cicddemonodeapp:7"
         LoadBalancerInfo:
-          ContainerName: "SampleApplicationName"
+          ContainerName: "DemoNodeApp1"
           ContainerPort: 80
 # Optional properties
         PlatformVersion: "LATEST"
